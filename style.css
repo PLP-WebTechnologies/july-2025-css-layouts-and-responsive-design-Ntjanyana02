@@ -1,0 +1,207 @@
+/* =========================
+   Base, tokens, and helpers
+   ========================= */
+:root{
+  --bg: #0e1116;
+  --surface: #141923;
+  --panel: #1b2230;
+  --text: #e8eef7;
+  --muted: #b7c3d1;
+  --brand: #55a6ff;
+  --border: #2a3346;
+
+  --radius: 12px;
+  --shadow: 0 8px 26px rgba(0,0,0,.25);
+
+  --space-1: .5rem;
+  --space-2: .75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+
+  --maxw: 1200px;
+}
+
+*,
+*::before,
+*::after{ box-sizing: border-box; }
+
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg), #0b0f15);
+}
+
+img, video{ max-width: 100%; height: auto; }
+
+/* Focus styles for accessibility */
+:focus-visible{
+  outline: 2px solid #9ed0ff;
+  outline-offset: 2px;
+}
+
+/* Skip link */
+.skip-link{
+  position: absolute; left: -9999px; top: 0;
+}
+.skip-link:focus{ left: 0; background: #fff; color: #000; padding: .3rem .6rem; border-radius: 6px; }
+
+/* =========================
+   Header (Flexbox nav)
+   ========================= */
+.site-header{
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.site-header .brand,
+.site-header .primary-nav{
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: var(--space-3);
+}
+.site-header .brand{
+  display: flex; align-items: center; gap: .6rem;
+}
+.logo{ color: var(--brand); font-size: 1.25rem; }
+.site-name{ color: var(--text); text-decoration: none; font-weight: 700; }
+
+.primary-nav{
+  padding-top: 0;
+}
+.nav-list{
+  list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-3);
+  padding: 0; margin: 0;
+}
+.nav-list a{
+  color: var(--muted);
+  text-decoration: none;
+  padding: .4rem .7rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.nav-list a:hover,
+.nav-list a:focus{
+  color: #fff;
+  background: #24304a;
+  border-color: #2f4163;
+}
+
+/* =========================
+   Page layout (CSS Grid)
+   Areas: hero, cards, content, sidebar
+   ========================= */
+.layout{
+  display: grid;
+  gap: var(--space-6);
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-3) var(--space-6);
+  grid-template-columns: 1fr;              /* mobile-first */
+  grid-template-areas:
+    "hero"
+    "cards"
+    "content"
+    "sidebar";
+}
+
+/* Assign grid areas */
+.hero{ grid-area: hero; }
+.cards{ grid-area: cards; }
+.content{ grid-area: content; }
+.sidebar{ grid-area: sidebar; }
+
+/* Panels */
+.hero, .cards, .content, .sidebar{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  box-shadow: var(--shadow);
+}
+
+/* Hero */
+.lede{ color: var(--muted); max-width: 70ch; }
+.cta{ display: flex; gap: var(--space-2); flex-wrap: wrap; margin-block: var(--space-3); }
+.btn{
+  display: inline-block;
+  text-decoration: none;
+  background: var(--brand);
+  color: #081222;
+  font-weight: 700;
+  padding: .6rem .9rem;
+  border-radius: 999px;
+  border: 2px solid #7bc0ff;
+}
+.btn:hover, .btn:focus{ filter: brightness(1.05); transform: translateY(-1px); }
+.btn-secondary{ background: transparent; color: #d6e7ff; border-color: #365a86; }
+
+/* Cards (Flexbox) */
+.card-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.card{
+  flex: 1 1 240px;          /* responsive basis + wrap */
+  min-width: 220px;
+  background: #0f1623;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+
+/* Articles/content */
+.post + .post{ margin-top: var(--space-3); }
+.post ul, .post ol{ margin-left: 1.25rem; }
+
+/* Sidebar */
+.resource-list{ padding-left: 1.2rem; }
+.resource-list li + li{ margin-top: .35rem; }
+.sidebar-media{ margin-top: var(--space-3); }
+
+/* =========================
+   Media queries (RWD)
+   ========================= */
+
+/* Tablet: two columns; sidebar shares row with content/cards */
+@media (min-width: 720px){
+  .layout{
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "hero hero"
+      "cards sidebar"
+      "content sidebar";
+  }
+}
+
+/* Desktop: three-column feel; hero spans two columns */
+@media (min-width: 1024px){
+  .layout{
+    grid-template-columns: 2fr 1.5fr 1fr;
+    grid-template-areas:
+      "hero hero sidebar"
+      "cards content sidebar";
+  }
+  .nav-list{ gap: var(--space-4); }
+}
+
+/* Gentle typography scaling */
+h1{ font-size: clamp(1.5rem, 1.2rem + 2vw, 2.4rem); margin: 0 0 .5rem; }
+h2{ font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem); margin: 0 0 .5rem; }
+h3{ font-size: clamp(1.05rem, .95rem + .5vw, 1.25rem); margin: 0 0 .35rem; }
+
+/* Footer */
+.site-footer{
+  margin-top: var(--space-8);
+  padding: var(--space-4) var(--space-3);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  text-align: center;
+}
