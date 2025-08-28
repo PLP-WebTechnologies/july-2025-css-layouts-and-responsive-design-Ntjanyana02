@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Layouts & Responsive Web Design — Flexbox + Grid</title>
+  <meta name="description" content="A responsive multi-section page demonstrating modern CSS layout with Flexbox and Grid, plus media queries for mobile, tablet, and desktop." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">◆</span>
+      <a href="#" class="site-name">Flex+Grid Demo</a>
+    </div>
+
+    <!-- Flexbox used here -->
+    <nav class="primary-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#cards">Showcase</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="#sidebar">Resources</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CSS Grid powers the page layout -->
+  <main id="main" class="layout">
+    <section id="hero" class="hero" aria-labelledby="hero-heading">
+      <h1 id="hero-heading">CSS Layouts & Responsive Web Design</h1>
+      <p class="lede">
+        Build layouts that gracefully adapt using <strong>Flexbox</strong> for 1D alignment and
+        <strong>Grid</strong> for 2D structure—styled with fluid units and media queries.
+      </p>
+      <div class="cta">
+        <a class="btn" href="#cards">Explore Cards</a>
+        <a class="btn btn-secondary" href="#articles">Read Articles</a>
+      </div>
+      <figure class="hero-media">
+        <img src="https://via.placeholder.com/960x420.png?text=Responsive+Layout"
+             alt="Illustration of a responsive layout adjusting across devices." width="960" height="420" />
+        <figcaption>Grid for page structure, Flexbox for component alignment.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Flexbox used inside for card alignment/wrapping -->
+    <section id="cards" class="cards" aria-labelledby="cards-heading">
+      <h2 id="cards-heading">Showcase (Flexbox Cards)</h2>
+      <div class="card-list">
+        <article class="card">
+          <h3>Starter</h3>
+          <p>Simple, clean component with consistent padding and border radius.</p>
+          <a class="btn" href="#">Choose Starter</a>
+        </article>
+
+        <article class="card">
+          <h3>Pro</h3>
+          <p>Uses Flexbox wrapping to respond at narrower widths without breaking.</p>
+          <a class="btn" href="#">Choose Pro</a>
+        </article>
+
+        <article class="card">
+          <h3>Business</h3>
+          <p>Scales with relative units (<code>rem</code>, <code>%</code>) and fluid gaps.</p>
+          <a class="btn" href="#">Choose Business</a>
+        </article>
+
+        <article class="card">
+          <h3>Enterprise</h3>
+          <p>Demonstrates alignment controls and equal-height columns via Flexbox.</p>
+          <a class="btn" href="#">Contact Sales</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="articles" class="content" aria-labelledby="articles-heading">
+      <h2 id="articles-heading">Articles (Grid + readable flow)</h2>
+
+      <article class="post">
+        <h3>When to use Grid vs. Flexbox</h3>
+        <p>
+          Use <strong>Grid</strong> when you place items in two dimensions (rows and columns), and
+          <strong>Flexbox</strong> when aligning items in one direction (row or column) with control
+          over spacing and order.
+        </p>
+        <ul>
+          <li>Grid: full-page or section layouts with defined areas.</li>
+          <li>Flex: navigation bars, card rows, toolbars.</li>
+        </ul>
+      </article>
+
+      <article class="post">
+        <h3>Responsive strategies</h3>
+        <p>
+          Combine relative units (<code>%</code>, <code>vw</code>, <code>rem</code>) with media
+          queries at a few purposeful breakpoints. Let content drive the layout rather than fixed device sizes.
+        </p>
+        <ol>
+          <li>Start mobile-first with a single column.</li>
+          <li>Enhance at medium widths (add a sidebar or second column).</li>
+          <li>Scale to desktop (wider gutters, multi-column grids).</li>
+        </ol>
+      </article>
+    </section>
+
+    <aside id="sidebar" class="sidebar" aria-labelledby="sidebar-heading">
+      <h2 id="sidebar-heading">Resources</h2>
+      <nav aria-label="Resource links">
+        <ul class="resource-list">
+          <li><a href="https://developer.mozilla.org/docs/Web/CSS/CSS_grid_layout">MDN: CSS Grid</a></li>
+          <li><a href="https://developer.mozilla.org/docs/Web/CSS/CSS_flexible_box_layout">MDN: Flexbox</a></li>
+          <li><a href="https://web.dev/learn/design/">web.dev: Responsive Design</a></li>
+        </ul>
+      </nav>
+
+      <figure class="sidebar-media">
+        <img src="https://via.placeholder.com/520x320.png?text=Grid+Areas"
+             alt="Diagram of grid template areas for hero, content, and sidebar." width="520" height="320" />
+        <figcaption>Grid template areas drive the page layout at each breakpoint.</figcaption>
+      </figure>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <time datetime="2025">2025</time> Responsive Layout Demo</p>
+  </footer>
+</body>
+</html>
